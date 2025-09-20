@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ระบบสุ่มรางวัลล็อตเตอรี่</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <link href="style.css" rel="stylesheet">
+    <style>
+        /* Force button to be visible */
+        #checkBtn {
+            background: #00b894 !important;
+            color: white !important;
+            border: 2px solid #00a085 !important;
+            padding: 15px !important;
+            font-size: 18px !important;
+            border-radius: 10px !important;
+            width: 100% !important;
+            display: block !important;
+            visibility: visible !important;
+            opacity: 1 !important;
+            cursor: pointer !important;
+            margin: 10px 0 !important;
+            box-shadow: 0 4px 8px rgba(0,184,148,0.3) !important;
+        }
+
+        #checkBtn:hover {
+            background: #00a085 !important;
+            transform: translateY(-2px) !important;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="main-container">
+            <div class="header">
+                <h1><i class="fas fa-trophy"></i> ระบบสุ่มรางวัลล็อตเตอรี่</h1>
+                <p>งานนิทรรศการไดเวอร์ซิชั่น</p>
+            </div>
+            
+            <div class="text-center mb-4">
+                <button type="button" class="btn btn-generate" onclick="generatePrizes()">
+                    <i class="fas fa-dice"></i> ดำเนินการสุ่มรางวัล
+                </button>
+            </div>
+            
+            <div class="prize-table">
+                <table class="table table-hover mb-0">
+                    <thead>
+                        <tr>
+                            <th><i class="fas fa-crown"></i> รางวัลที่ 1</th>
+                            <th><i class="fas fa-medal"></i> รางวัลที่ 2</th>
+                            <th><i class="fas fa-star"></i> รางวัลเลขข้างเคียง</th>
+                            <th><i class="fas fa-gift"></i> รางวัลเลขท้าย 2 ตัว</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr id="prizeRow">
+                            <td colspan="4" class="empty-table">
+                             ยังไม่ได้ดำเนินการสุ่มรางวัล
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            
+            <div class="check-section">
+                <h3 class="text-center mb-4">
+                    <i class="fas fa-search"></i> ตรวจรางวัล
+                </h3>
+                
+                <div class="alert alert-warning text-center mb-4" id="warningAlert" style="display: none;">
+                    <i class="fas fa-exclamation-triangle"></i> 
+                    <strong>กรุณากดปุ่ม "ดำเนินการสุ่มรางวัล" ก่อนตรวจรางวัล</strong>
+                </div>
+                
+                <div class="alert alert-success text-center mb-4" id="successAlert" style="display: none;">
+                    <i class="fas fa-check-circle"></i> 
+                    <strong>พร้อมตรวจรางวัลแล้ว!</strong> กรอกหมายเลขล็อตเตอรี่ของคุณ
+                </div>
+                
+                <form id="checkForm">
+                    <div class="row">
+                        <div class="col-md-8">
+                            <input type="number" name="lottery_number" id="lotteryInput" class="form-control" 
+                                   placeholder="กรอกหมายเลขล็อตเตอรี่ " 
+                                   min="0" max="999" required>
+                        </div>
+                    </div>
+                    <div class="row mt-3">
+                        <div class="col-md-8">
+                            <p class="text-muted mb-2">กดปุ่มด้านล่างเพื่อตรวจรางวัล</p>
+                            <input type="submit" name="check_number" id="checkBtn" value="🔍 ตรวจรางวัล"
+                                style="background: #00b894 !important; color: white !important; border: 2px solid #00a085 !important; padding: 15px !important; font-size: 18px !important; border-radius: 10px !important; width: 100% !important; display: block !important; visibility: visible !important; opacity: 1 !important; cursor: pointer !important; margin: 10px 0 !important; box-shadow: 0 4px 8px rgba(0,184,148,0.3) !important;">
+                        </div>
+                    </div>
+                </form>
+                
+                <div class="result-box" id="resultBox" style="display: none;">
+                 <span id="resultText"></span>
+                </div>
+                
+            </div>
+            
+            <div class="text-center mt-4">
+                <small class="text-muted">
+                    หมายเหตุ: สามารถสุ่มรางวัลใหม่ได้ตลอดเวลา และระบบจะแสดงผลรางวัลครั้งล่าสุดเท่านั้น
+                </small>
+            </div>
+        </div>
+    </div>
+    
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        let prizes = null;
+
+        // ฟังก์ชันสำหรับการสุ่มรางวัล
+        function generatePrizes() {
+            prizes = {};
+            
+            // รางวัลที่ 1 (1 รางวัล)
+            prizes.first = String(Math.floor(Math.random() * 1000)).padStart(3, '0');
+            
+            // รางวัลที่ 2 (3 รางวัล)
+            prizes.second = [];
+            for (let i = 0; i < 3; i++) {
+                prizes.second.push(String(Math.floor(Math.random() * 1000)).padStart(3, '0'));
+            }
+            
+            // รางวัลเลขข้างเคียงรางวัลที่ 1 (2 รางวัล)
+            const firstNum = parseInt(prizes.first);
+            prizes.adjacent = [];
+            prizes.adjacent.push(String((firstNum + 1) % 1000).padStart(3, '0'));
+            prizes.adjacent.push(String((firstNum - 1 + 1000) % 1000).padStart(3, '0'));
+            
+            // รางวัลเลขท้าย 2 ตัว (10 รางวัล)
+            prizes.last_two = String(Math.floor(Math.random() * 100)).padStart(2, '0');
+            
+            // แสดงผลรางวัล
+            displayPrizes();
+            
+            // แสดงข้อความสำเร็จ
+            document.getElementById('warningAlert').style.display = 'none';
+            document.getElementById('successAlert').style.display = 'block';
+        }
+
+        // แสดงผลรางวัล
+        function displayPrizes() {
+            const prizeRow = document.getElementById('prizeRow');
+            prizeRow.innerHTML = `
+                <td><span class="prize-badge">${prizes.first}</span></td>
+                <td>
+                    ${prizes.second.map(num => `<span class="prize-badge">${num}</span>`).join('')}
+                </td>
+                <td>
+                    ${prizes.adjacent.map(num => `<span class="prize-badge">${num}</span>`).join('')}
+                </td>
+                <td><span class="prize-badge">${prizes.last_two}</span></td>
+            `;
+        }
+
+        // ฟังก์ชันสำหรับตรวจรางวัล
+        function checkPrize(number) {
+            console.log('checkPrize called with:', number);
+            console.log('Current prizes:', prizes);
+            
+            const results = [];
+            const num = String(number).padStart(3, '0');
+            console.log('Checking number:', num);
+            
+            // ตรวจรางวัลที่ 1
+            if (num === prizes.first) {
+                console.log('Won first prize!');
+                results.push("รางวัลที่ 1");
+            }
+            
+            // ตรวจรางวัลที่ 2
+            if (prizes.second.includes(num)) {
+                console.log('Won second prize!');
+                results.push("รางวัลที่ 2");
+            }
+            
+            // ตรวจรางวัลเลขข้างเคียง
+            if (prizes.adjacent.includes(num)) {
+                console.log('Won adjacent prize!');
+                results.push("รางวัลเลขข้างเคียงรางวัลที่ 1");
+            }
+            
+            // ตรวจรางวัลเลขท้าย 2 ตัว
+            if (num.substring(1, 3) === prizes.last_two) {
+                console.log('Won last two digits prize!');
+                results.push("รางวัลเลขท้าย 2 ตัว");
+            }
+            
+            console.log('Final results:', results);
+            return results;
+        }
+
+        // JavaScript สำหรับปุ่มตรวจรางวัล (แบบง่าย)
+        document.addEventListener('DOMContentLoaded', function() {
+            const checkForm = document.getElementById('checkForm');
+            const lotteryInput = document.getElementById('lotteryInput');
+            
+            // เมื่อกดปุ่มตรวจรางวัล
+            checkForm.addEventListener('submit', function(e) {
+                e.preventDefault();
+                console.log('Form submitted');
+                
+                const value = lotteryInput.value;
+                console.log('Input value:', value);
+                
+                // ตรวจสอบว่าสุ่มรางวัลแล้วหรือยัง
+                if (!prizes) {
+                    console.log('No prizes generated yet');
+                    showResult("⚠️ กรุณากดปุ่ม 'ดำเนินการสุ่มรางวัล' ก่อนตรวจรางวัล");
+                    return;
+                }
+                
+                // ตรวจสอบว่ากรอกข้อมูลหรือไม่
+                if (!value || value === '') {
+                    console.log('No input value');
+                    showResult(" กรุณากรอกหมายเลขล็อตเตอรี่");
+                    lotteryInput.focus();
+                    return;
+                }
+                
+                // ตรวจสอบช่วงตัวเลข
+                if (value < 0 || value > 999) {
+                    console.log('Invalid number range');
+                    showResult(" กรุณากรอกหมายเลขที่ถูกต้อง ");
+                    lotteryInput.focus();
+                    return;
+                }
+                
+                // ตรวจรางวัล
+                console.log('Checking prize for:', value);
+                const results = checkPrize(value);
+                console.log('Prize results:', results);
+                
+                if (results.length === 0) {
+                    showResult("❌ หมายเลข " + String(value).padStart(3, '0') + " ไม่ถูกรางวัลใดเลย");
+                } else {
+                    showResult("🎉 หมายเลข " + String(value).padStart(3, '0') + " ถูกรางวัล: " + results.join(", "));
+                }
+            });
+            
+            // ตรวจสอบเมื่อ Enter
+            lotteryInput.addEventListener('keypress', function(e) {
+                if (e.key === 'Enter') {
+                    checkForm.dispatchEvent(new Event('submit'));
+                }
+            });
+        });
+
+        // แสดงผลลัพธ์
+        function showResult(message) {
+            console.log('showResult called with:', message);
+            const resultBox = document.getElementById('resultBox');
+            const resultText = document.getElementById('resultText');
+            
+            if (resultBox && resultText) {
+                resultText.textContent = message;
+                resultBox.style.display = 'block';
+                console.log('Result displayed successfully');
+            } else {
+                console.error('Could not find resultBox or resultText elements');
+            }
+        }
+    </script>
+</body>
+</html>
