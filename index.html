@@ -58,7 +58,7 @@
                     </thead>
                     <tbody>
                         <tr id="prizeRow">
-                            <td colspan="4" class="empty-table">
+                            <td colspan="4" class="empty-table" data-label="สถานะ">
                              ยังไม่ได้ดำเนินการสุ่มรางวัล
                             </td>
                         </tr>
@@ -82,16 +82,18 @@
                 </div>
                 
                 <form id="checkForm">
-                    <div class="row">
-                        <div class="col-md-8">
-                            <input type="number" name="lottery_number" id="lotteryInput" class="form-control" 
-                                   placeholder="กรอกหมายเลขล็อตเตอรี่ " 
-                                   min="0" max="999" required>
+                    <div class="row justify-content-center">
+                        <div class="col-12 col-sm-10 col-md-8 col-lg-6">
+                            <div class="input-group mb-3">
+                                <input type="number" name="lottery_number" id="lotteryInput" class="form-control" 
+                                       placeholder="กรอกหมายเลขล็อตเตอรี่ (0-999)" 
+                                       min="0" max="999" required>
+                            </div>
                         </div>
                     </div>
-                    <div class="row mt-3">
-                        <div class="col-md-8">
-                            <p class="text-muted mb-2">กดปุ่มด้านล่างเพื่อตรวจรางวัล</p>
+                    <div class="row justify-content-center">
+                        <div class="col-12 col-sm-10 col-md-8 col-lg-6">
+                            <p class="text-muted mb-2 text-center">กดปุ่มด้านล่างเพื่อตรวจรางวัล</p>
                             <input type="submit" name="check_number" id="checkBtn" value="🔍 ตรวจรางวัล"
                                 style="background: #00b894 !important; color: white !important; border: 2px solid #00a085 !important; padding: 15px !important; font-size: 18px !important; border-radius: 10px !important; width: 100% !important; display: block !important; visibility: visible !important; opacity: 1 !important; cursor: pointer !important; margin: 10px 0 !important; box-shadow: 0 4px 8px rgba(0,184,148,0.3) !important;">
                         </div>
@@ -150,14 +152,14 @@
         function displayPrizes() {
             const prizeRow = document.getElementById('prizeRow');
             prizeRow.innerHTML = `
-                <td><span class="prize-badge">${prizes.first}</span></td>
-                <td>
+                <td data-label="รางวัลที่ 1"><span class="prize-badge">${prizes.first}</span></td>
+                <td data-label="รางวัลที่ 2">
                     ${prizes.second.map(num => `<span class="prize-badge">${num}</span>`).join('')}
                 </td>
-                <td>
+                <td data-label="รางวัลเลขข้างเคียง">
                     ${prizes.adjacent.map(num => `<span class="prize-badge">${num}</span>`).join('')}
                 </td>
-                <td><span class="prize-badge">${prizes.last_two}</span></td>
+                <td data-label="รางวัลเลขท้าย 2 ตัว"><span class="prize-badge">${prizes.last_two}</span></td>
             `;
         }
 

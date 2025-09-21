@@ -155,19 +155,378 @@ body {
 }
 
 /* Responsive Design */
-@media (max-width: 768px) {
+
+/* Extra Large Devices (1200px and up) */
+@media (min-width: 1200px) {
+    .main-container {
+        max-width: 1140px;
+        margin: 2rem auto;
+        padding: 2.5rem;
+    }
+    
+    .header h1 {
+        font-size: 2.5rem;
+        margin-bottom: 0.8rem;
+    }
+    
+    .header p {
+        font-size: 1.2rem;
+    }
+    
+    .prize-table th,
+    .prize-table td {
+        padding: 1.5rem;
+        font-size: 1.1rem;
+    }
+    
+    .prize-badge {
+        font-size: 1rem;
+        padding: 0.5rem 1rem;
+    }
+    
+    .btn-generate {
+        font-size: 1.3rem;
+        padding: 18px 35px;
+    }
+    
+    #checkBtn {
+        font-size: 20px !important;
+        padding: 18px !important;
+    }
+    
+    .form-control {
+        font-size: 1.2rem;
+        padding: 15px 18px;
+    }
+    
+    .result-box {
+        font-size: 1.2rem;
+        padding: 1.2rem;
+    }
+}
+
+/* Large Devices (992px and up) */
+@media (min-width: 992px) and (max-width: 1199px) {
+    .main-container {
+        max-width: 960px;
+        margin: 2rem auto;
+        padding: 2rem;
+    }
+    
+    .header h1 {
+        font-size: 2.2rem;
+        margin-bottom: 0.6rem;
+    }
+    
+    .header p {
+        font-size: 1.1rem;
+    }
+    
+    .prize-table th,
+    .prize-table td {
+        padding: 1.2rem;
+        font-size: 1rem;
+    }
+    
+    .prize-badge {
+        font-size: 0.95rem;
+        padding: 0.4rem 0.9rem;
+    }
+    
+    .btn-generate {
+        font-size: 1.2rem;
+        padding: 15px 30px;
+    }
+    
+    #checkBtn {
+        font-size: 18px !important;
+        padding: 15px !important;
+    }
+    
+    .form-control {
+        font-size: 1.1rem;
+        padding: 12px 15px;
+    }
+    
+    .result-box {
+        font-size: 1.1rem;
+        padding: 1rem;
+    }
+}
+
+/* Medium Devices (768px and up) */
+@media (min-width: 768px) and (max-width: 991px) {
+    .main-container {
+        margin: 1.5rem;
+        padding: 1.5rem;
+    }
+    
+    .header h1 {
+        font-size: 2rem;
+    }
+    
+    .prize-table th,
+    .prize-table td {
+        padding: 1rem;
+        font-size: 0.95rem;
+    }
+    
+    .prize-badge {
+        font-size: 0.85rem;
+        padding: 0.3rem 0.7rem;
+    }
+    
+    .btn-generate {
+        font-size: 1.1rem;
+        padding: 12px 25px;
+    }
+    
+    #checkBtn {
+        font-size: 17px !important;
+        padding: 13px !important;
+    }
+    
+    .form-control {
+        font-size: 1rem;
+        padding: 12px 15px;
+    }
+    
+    .result-box {
+        font-size: 1rem;
+        padding: 0.9rem;
+    }
+}
+
+/* Small Devices (576px and up) */
+@media (min-width: 576px) and (max-width: 767px) {
     .main-container {
         margin: 1rem;
-        padding: 1rem;
+        padding: 1.2rem;
     }
     
     .header h1 {
         font-size: 1.8rem;
     }
     
+    .header p {
+        font-size: 1rem;
+    }
+    
+    .prize-table {
+        font-size: 0.9rem;
+    }
+    
+    .prize-table th,
+    .prize-table td {
+        padding: 0.8rem;
+        font-size: 0.9rem;
+    }
+    
+    .prize-badge {
+        font-size: 0.8rem;
+        padding: 0.25rem 0.6rem;
+        margin: 0.1rem;
+    }
+    
     .btn-generate {
         width: 100%;
+        font-size: 1rem;
+        padding: 12px 20px;
         margin-bottom: 1rem;
+    }
+    
+    #checkBtn {
+        font-size: 16px !important;
+        padding: 12px !important;
+    }
+    
+    .check-section {
+        padding: 1.5rem;
+    }
+    
+    .form-control {
+        font-size: 0.95rem;
+        padding: 10px 12px;
+    }
+    
+    .result-box {
+        font-size: 1rem;
+        padding: 0.8rem;
+    }
+    
+    .check-section h3 {
+        font-size: 1.3rem;
+        margin-bottom: 1.2rem;
+    }
+    
+    .alert {
+        font-size: 0.95rem;
+        padding: 0.8rem;
+    }
+    
+    .text-muted {
+        font-size: 0.9rem;
+    }
+}
+
+/* Extra Small Devices (less than 576px) */
+@media (max-width: 575px) {
+    .main-container {
+        margin: 0.5rem;
+        padding: 1rem;
+        border-radius: 15px;
+    }
+    
+    .header h1 {
+        font-size: 1.5rem;
+        margin-bottom: 0.3rem;
+    }
+    
+    .header p {
+        font-size: 0.9rem;
+    }
+    
+    .prize-table {
+        margin: 1rem 0;
+        border-radius: 10px;
+    }
+    
+    .prize-table th {
+        padding: 0.6rem 0.4rem;
+        font-size: 0.8rem;
+        text-align: center;
+    }
+    
+    .prize-table td {
+        padding: 0.6rem 0.4rem;
+        font-size: 0.8rem;
+        text-align: center;
+    }
+    
+    .prize-badge {
+        font-size: 0.75rem;
+        padding: 0.2rem 0.5rem;
+        margin: 0.1rem;
+        display: block;
+        margin-bottom: 0.2rem;
+    }
+    
+    .btn-generate {
+        width: 100%;
+        font-size: 0.95rem;
+        padding: 10px 15px;
+        margin-bottom: 1rem;
+        border-radius: 25px;
+    }
+    
+    #checkBtn {
+        font-size: 16px !important;
+        padding: 12px !important;
+    }
+    
+    .check-section {
+        padding: 1rem;
+        margin-top: 1rem;
+    }
+    
+    .check-section h3 {
+        font-size: 1.2rem;
+        margin-bottom: 1rem;
+    }
+    
+    .form-control {
+        font-size: 0.9rem;
+        padding: 8px 10px;
+        border-radius: 8px;
+    }
+    
+    .input-group {
+        margin-bottom: 1rem;
+    }
+    
+    .input-group .form-control {
+        border-radius: 8px;
+    }
+    
+    .result-box {
+        font-size: 0.9rem;
+        padding: 0.7rem;
+        margin-top: 0.8rem;
+    }
+    
+    .alert {
+        font-size: 0.85rem;
+        padding: 0.6rem;
+    }
+    
+    .text-muted {
+        font-size: 0.8rem;
+    }
+    
+    .check-section h3 {
+        font-size: 1.2rem;
+        margin-bottom: 1rem;
+    }
+    
+    /* ปรับตารางให้แสดงผลในแนวตั้งสำหรับหน้าจอเล็ก */
+    .prize-table table {
+        display: block;
+        width: 100%;
+    }
+    
+    .prize-table thead {
+        display: none;
+    }
+    
+    .prize-table tbody {
+        display: block;
+        width: 100%;
+    }
+    
+    .prize-table tr {
+        display: block;
+        margin-bottom: 1rem;
+        background: white;
+        border-radius: 10px;
+        box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        padding: 1rem;
+    }
+    
+    .prize-table td {
+        display: block;
+        text-align: left;
+        border: none;
+        padding: 0.5rem 0 0.5rem 0;
+        position: relative;
+        margin-bottom: 0.5rem;
+    }
+    
+    .prize-table td:before {
+        content: attr(data-label);
+        position: relative;
+        left: 0;
+        width: 100%;
+        font-weight: bold;
+        color: #74b9ff;
+        font-size: 0.8rem;
+        margin-bottom: 0.3rem;
+        display: block;
+    }
+    
+    .prize-table td:nth-child(1):before { content: "🥇 รางวัลที่ 1"; }
+    .prize-table td:nth-child(2):before { content: "🥈 รางวัลที่ 2"; }
+    .prize-table td:nth-child(3):before { content: "⭐ รางวัลเลขข้างเคียง"; }
+    .prize-table td:nth-child(4):before { content: "🎁 รางวัลเลขท้าย 2 ตัว"; }
+    
+    .prize-table td .prize-badge {
+        margin-top: 0.3rem;
+        display: inline-block;
+        margin-right: 0.2rem;
+        margin-bottom: 0.2rem;
+    }
+    
+    .prize-table td .prize-badge:last-child {
+        margin-right: 0;
     }
 }
 
